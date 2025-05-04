@@ -16,30 +16,79 @@
         </nav>
     </header>
 
+    <!-- Firebase App (SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+
+<script>
+  // Tu configuración Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
+    authDomain: "webtemariux.firebaseapp.com",
+    projectId: "webtemariux",
+    appId: "1:994279376923:web:68ef2427e69da252f190be"
+};
+
+  // Inicializar Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+  // Iniciar sesión con Google
+function loginConGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+    .then(result => {
+        alert(`Bienvenido, ${result.user.displayName}`);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+</script>
+
+<button onclick="loginConGoogle()">Iniciar sesión con Google</button>
+
     <main>
+        <section id="nivel">
+            <h2>🧠 ¿Qué nivel necesitas?</h2>
+            <label for="edad">Ingresa tu edad:</label>
+            <input type="number" id="edad" min="5" max="99">
+            <button id="recomendar">Recomendar nivel</button>
+            <p id="recomendacion"></p>
+        </section>
+
         <section id="gratis">
-        <h2>🎓 Temarios Gratuitos</h2>
-        <ul>
-            <li>✏️ Matemática - 6° Primaria</li>
-            <li>📖 Comunicación - 1° Secundaria</li>
-        </ul>
-        </section>
-    
-        <section id="premium">
-        <h2>💎 Temarios Premium</h2>
-        <button id="mostrarPremium">Ver temarios premium</button>
-        <div id="listaPremium" class="oculto">
+            <h2>🎓 Temarios Gratuitos</h2>
             <ul>
-            <li>🧮 Matemática Avanzada - S/. 3.00</li>
-            <li>🏛️ Historia del Perú - S/. 4.00</li>
+            <li>🧪 Química</li>
+            <li>🧮 Matemática</li>
+            <li>🌱 Biología</li>
+            <li>🏛️ Historia</li>
+            <li>🗺️ Geografía</li>
+            <li>🇬🇧 Inglés</li>
+            <li>🧠 Filosofía</li>
             </ul>
-        </div>
         </section>
+
+        <section id="premium">
+            <h2>💎 Temarios Premium</h2>
+            <button id="mostrarPremium">Ver temarios premium</button>
+            <div id="listaPremium" class="oculto">
+            <ul>
+                <li>🧪 Química Avanzada - S/. 3.00</li>
+                <li>🧮 Matemática Avanzada - S/. 3.00</li>
+                <li>🌱 Biología Molecular - S/. 4.00</li>
+                <li>🏛️ Historia del Perú - S/. 4.00</li>
+                <li>🗺️ Geopolítica Moderna - S/. 4.00</li>
+                <li>🇬🇧 Inglés Académico - S/. 5.00</li>
+                <li>🧠 Filosofía Moderna - S/. 5.00</li>
+            </ul>
+            </div>
+        </section>          
     
         <section id="contacto">
         <h2>📬 Contáctame</h2>
         <p>Escríbeme por WhatsApp: <a href="https://wa.me/51921054309" target="_blank">Haz clic aquí</a></p>
-        <p>Yape/Plin: <strong>921054309</strong></p>
         </section>
     </main>
     
