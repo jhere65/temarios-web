@@ -11,7 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
-<body>
+<body>   
     <header>
         <h1>📚 Temarios Personalizados</h1>
         <nav>
@@ -20,6 +20,12 @@
             <a href="#contacto">Contacto</a>
         </nav>
     </header>
+
+    <div id="usuario-info" style="display: none; position: absolute; top: 10px; left: 10px;">
+        <img id="foto-usuario" src="" alt="Foto" style="width: 40px; height: 40px; border-radius: 50%; vertical-align: middle;">
+        <span id="nombre-usuario" style="margin-left: 10px; font-weight: bold;"></span>
+        <button onclick="cerrarSesion()" style="margin-left: 15px; padding: 5px 10px; font-size: 12px;">Cerrar sesión</button>
+    </div>   
 
     <main>
         <section id="nivel">
@@ -192,11 +198,16 @@ const db = firebase.firestore();
     let usuarioRegistrado = false;
     let usuarioEsPremium = false;
 
-    firebase.auth().onAuthStateChanged(async (user) => {
+    firebase.auth().onAuthStateChanged(async (user) =>{
     if (user) {
     usuarioRegistrado = true;
     const userRef = db.collection("usuarios").doc(user.uid);
     const doc = await userRef.get();
+    function mostrarBienvenida(nombreCompleto) {
+    const nombre = nombreCompleto.split(" ")[0]; // Primer nombre
+    document.getElementById("nombre-usuario").textContent = `Hola, ${nombre}`;
+    document.getElementById("usuario-info").style.display = "block";
+}
 
     // Si el usuario no existe aún, lo agregamos
     if (!doc.exists) {
@@ -209,6 +220,12 @@ const db = firebase.firestore();
     if (doc.exists && doc.data().premium === true) {
         usuarioEsPremium = true;
     }
+    // Dentro de onAuthStateChanged:
+    if (user) {
+        const foto = user.photoURL;
+    if (foto) {
+        document.getElementById("foto-usuario").src = foto;
+}
 // Mostrar mensaje de bienvenida
     mostrarBienvenida(user.displayName || user.email);
 
@@ -216,7 +233,7 @@ const db = firebase.firestore();
     } else {
     ocultarTodo();
     }
-});
+}});
 
 function loginConGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -255,6 +272,15 @@ function mostrarTemarios() {
     }
     }
 }
+function cerrarSesion() {
+firebase.auth().signOut().then(() => {
+    alert("Has cerrado sesión.");
+    location.reload(); // Recarga la página para ocultar contenido
+}).catch((error) => {
+    console.error("Error al cerrar sesión:", error);
+});
+}
+
 </script>
 <script src="script.js"></script>
 </body>
