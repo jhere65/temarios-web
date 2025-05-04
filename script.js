@@ -1,12 +1,19 @@
+// Mostrar mensaje de bienvenida
+window.addEventListener("DOMContentLoaded", () => {
+    alert("¡Bienvenido a Temarios Personalizados!");
+});
+
+  // Mostrar/ocultar temarios premium
 document.getElementById("mostrarPremium").addEventListener("click", () => {
     const lista = document.getElementById("listaPremium");
-    lista.style.display = lista.style.display === "none" ? "block" : "none";
+    lista.classList.toggle("oculto");
 });
-function mostrarHora() {
-    const ahora = new Date();
-    const horaTexto = ahora.toLocaleTimeString();
-    document.getElementById("hora").textContent = "Hora actual: " + horaTexto;
-}
 
-mostrarHora();
-setInterval(mostrarHora, 1000);
+  // Mostrar hora actual
+function actualizarHora() {
+    const ahora = new Date();
+    const hora = ahora.toLocaleTimeString();
+    document.getElementById("hora").textContent = `Hora actual: ${hora}`;
+}  
+actualizarHora();
+setInterval(actualizarHora, 1000);  
