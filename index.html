@@ -174,7 +174,8 @@
         <p>&copy; 2025 Temarios Personalizados | <span id="hora"></span></p>
     </footer>
 
-
+<div id="mensaje-bienvenida" style="display: none; padding: 10px; background-color: #d4edda; color: #155724; font-weight: bold; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 10px;">
+</div>
 <script>
   // Tu configuración Firebase
 const firebaseConfig = {
@@ -197,6 +198,7 @@ const db = firebase.firestore();
     const userRef = db.collection("usuarios").doc(user.uid);
     const doc = await userRef.get();
 
+    // Si el usuario no existe aún, lo agregamos
     if (!doc.exists) {
         await userRef.set({
         email: user.email,
@@ -207,6 +209,8 @@ const db = firebase.firestore();
     if (doc.exists && doc.data().premium === true) {
         usuarioEsPremium = true;
     }
+// Mostrar mensaje de bienvenida
+    mostrarBienvenida(user.displayName || user.email);
 
     mostrarTemarios();
     } else {
@@ -218,17 +222,24 @@ function loginConGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
     .then((result) => {
-        alert(`Bienvenido, ${result.user.displayName}`);
+        // Mensaje de bienvenida en login
+        mostrarBienvenida(result.user.displayName || result.user.email);
     })
     .catch((error) => {
         console.error(error);
     });
+}
+function mostrarBienvenida(nombre) {
+    const mensaje = document.getElementById("mensaje-bienvenida");
+    mensaje.innerText = `✅ Bienvenido, ${nombre}. Tu sesión está activa.`;
+    mensaje.style.display = "block";
 }
 
 function ocultarTodo() {
     document.getElementById("temarios-gratis").style.display = "none";
     document.getElementById("temarios-premium").style.display = "none";
     document.getElementById("mensaje-premium").style.display = "none";
+    document.getElementById("mensaje-bienvenida").style.display = "none";
 }
 
 function mostrarTemarios() {
