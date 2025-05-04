@@ -2,12 +2,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/fireba
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA3cM96scGkHMyGSPCL6qEEo7s9V4O3qG0",
-    authDomain: "app-temarios.firebaseapp.com",
-    projectId: "app-temarios",
-    storageBucket: "app-temarios.appspot.com",
-    messagingSenderId: "166932438649",
-    appId: "1:166932438649:web:f487b4f1a032509d04a6d4"
+    apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
+    authDomain: "webtemariux.firebaseapp.com",
+    projectId: "webtemariux",
+    storageBucket: "webtemariux.firebasestorage.app",
+    messagingSenderId: "994279376923",
+    appId: "1:994279376923:web:68ef2427e69da252f190be"
 };
 
 const app = initializeApp(firebaseConfig);
