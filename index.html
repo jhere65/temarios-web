@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Temarios Personalizados</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Firebase App (requerido) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<!-- Firebase Authentication -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
 </head>
 <body>
     <header>
@@ -15,38 +20,6 @@
             <a href="#contacto">Contacto</a>
         </nav>
     </header>
-
-    <!-- Firebase App (SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
-
-<script>
-  // Tu configuración Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
-    authDomain: "webtemariux.firebaseapp.com",
-    projectId: "webtemariux",
-    appId: "1:994279376923:web:68ef2427e69da252f190be"
-};
-
-  // Inicializar Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-  // Iniciar sesión con Google
-function loginConGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
-    .then(result => {
-        alert(`Bienvenido, ${result.user.displayName}`);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-}
-</script>
-
-<button onclick="loginConGoogle()">Iniciar sesión con Google</button>
 
     <main>
         <section id="nivel">
@@ -95,7 +68,40 @@ function loginConGoogle() {
     <footer>
         <p>&copy; 2025 Temarios Personalizados | <span id="hora"></span></p>
     </footer>
-    
-    <script src="script.js"></script>
+
+<!-- Firebase App (SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+
+<script>
+  // Tu configuración Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
+    authDomain: "webtemariux.firebaseapp.com",
+    projectId: "webtemariux",
+    appId: "1:994279376923:web:68ef2427e69da252f190be"
+};
+
+  // Inicializar Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+  // Iniciar sesión con Google
+function loginConGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+    .then(result => {
+        alert(`Bienvenido, ${result.user.displayName}`);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+</script>
+
+<button onclick="loginConGoogle()">Iniciar sesión con Google</button>
+
+
+<script src="script.js"></script>
 </body>
 </html>

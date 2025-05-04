@@ -3,6 +3,32 @@ window.addEventListener("DOMContentLoaded", () => {
     alert("¡Bienvenido a Temarios Personalizados!");
 });
 
+const firebaseConfig = {
+    apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
+    authDomain: "webtemariux.firebaseapp.com",
+    projectId: "webtemariux",
+    storageBucket: "webtemariux.firebasestorage.app",
+    messagingSenderId: "994279376923",
+    appId: "1:994279376923:web:68ef2427e69da252f190be"
+};
+
+  // Inicializa Firebase
+firebase.initializeApp(firebaseConfig);
+
+  // Autenticación con Google
+function loginConGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+        const user = result.user;
+        alert(`¡Hola, ${user.displayName}!`);
+    })
+    .catch((error) => {
+        console.error(error);
+        alert("Error al iniciar sesión con Google.");
+    });
+}
 document.getElementById("recomendar").addEventListener("click", () => {
     const edad = parseInt(document.getElementById("edad").value);
     const resultado = document.getElementById("recomendacion");
