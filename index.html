@@ -6,10 +6,9 @@
     <title>Temarios Personalizados</title>
     <link rel="stylesheet" href="style.css">
     <!-- Firebase App (requerido) -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<!-- Firebase Authentication -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 </head>
 <body>
     <header>
@@ -94,7 +93,9 @@
                 </li>
             </ul>
         </section>
-
+        <div id="mensaje-premium" style="display:none; color:red;">
+            ⚠️ Solo usuarios premium pueden acceder a esta sección.
+        </div>
         <section id="premium">
             <h2>💎 Temarios Premium</h2>
             <button id="mostrarPremium">Ver temarios premium</button>
@@ -150,6 +151,7 @@
                 </li>
             </ul>
             </div>
+            
         </section>          
     
         <section id="contacto">
@@ -174,7 +176,60 @@ const firebaseConfig = {
 
   // Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
+    let usuarioRegistrado = false;
+    let usuarioEsPremium = false;
+
+    firebase.auth().onAuthStateChanged(async (user) => {
+    if (user) {
+        usuarioRegistrado = true;
+        const userRef = db.collection("usuarios").doc(user.uid);
+        const doc = await userRef.get();
+
+        if (!doc.exists) {
+        await userRef.set({
+            email: user.email,
+            premium: false
+        });
+        }
+
+        if (doc.exists && doc.data().premium === true) {
+        usuarioEsPremium = true;
+        }
+
+        mostrarTemarios();
+    } else {
+        ocultarTodo();
+    }
+    });
+
+    function loginConGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then((result) => console.log("Sesión iniciada"))
+        .catch((error) => console.error(error));
+    }
+
+    function ocultarTodo() {
+    document.getElementById("temarios-gratis").style.display = "none";
+    document.getElementById("temarios-premium").style.display = "none";
+    document.getElementById("mensaje-premium").style.display = "none";
+    }
+
+    function mostrarTemarios() {
+    if (usuarioRegistrado) {
+        document.getElementById("temarios-gratis").style.display = "block";
+
+        if (usuarioEsPremium) {
+        document.getElementById("temarios-premium").style.display = "block";
+        document.getElementById("mensaje-premium").style.display = "none";
+        } else {
+        document.getElementById("temarios-premium").style.display = "none";
+        document.getElementById("mensaje-premium").style.display = "block";
+        }
+    }
+    }
   // Iniciar sesión con Google
 function loginConGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -190,9 +245,7 @@ function loginConGoogle() {
 
 <button onclick="loginConGoogle()">Iniciar sesión con Google</button>
 
-<div id="mensaje-premium" style="display:none; color:red;">
-    ⚠️ Solo usuarios premium pueden acceder a esta sección.
-</div>
+
 
 
 <script src="script.js"></script>
