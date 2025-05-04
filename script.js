@@ -1,7 +1,4 @@
 // Mostrar mensaje de bienvenida
-window.addEventListener("DOMContentLoaded", () => {
-    alert("¡Bienvenido a Temarios Personalizados!");
-});
 
 document.getElementById("recomendar").addEventListener("click", () => {
     const edad = parseInt(document.getElementById("edad").value);
