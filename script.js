@@ -1,6 +1,8 @@
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
+document.addEventListener("DOMContentLoaded", () => {
 const firebaseConfig = {
     apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
     authDomain: "webtemariux.firebaseapp.com",
@@ -120,4 +122,5 @@ function actualizarHora() {
     document.getElementById("hora").textContent = `Hora actual: ${hora}`;
 }  
 actualizarHora();
-setInterval(actualizarHora, 1000);  
+setInterval(actualizarHora, 1000);
+});
