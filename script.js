@@ -1,4 +1,58 @@
-// Mostrar mensaje de bienvenida
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA3cM96scGkHMyGSPCL6qEEo7s9V4O3qG0",
+    authDomain: "app-temarios.firebaseapp.com",
+    projectId: "app-temarios",
+    storageBucket: "app-temarios.appspot.com",
+    messagingSenderId: "166932438649",
+    appId: "1:166932438649:web:f487b4f1a032509d04a6d4"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+let usuarioRegistrado = false;
+let usuarioEsPremium = false;
+
+document.getElementById("iniciarSesion").addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            mostrarBienvenida(user);
+        })
+        .catch((error) => {
+            console.error("Error al iniciar sesión:", error);
+        });
+});
+
+document.getElementById("cerrarSesion").addEventListener("click", () => {
+    signOut(auth).then(() => {
+        location.reload();
+    });
+});
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        mostrarBienvenida(user);
+        usuarioRegistrado = true;
+
+        const nombre = user.displayName || "Usuario";
+        document.getElementById("bienvenida").innerHTML = `Hola, <strong>${nombre}</strong>`;
+        document.getElementById("temarios-gratis").style.display = "block";
+        if (usuarioEsPremium) {
+            document.getElementById("temarios-premium").style.display = "block";
+        }
+    }
+});
+
+function mostrarBienvenida(usuario) {
+    const nombre = usuario.displayName || "Usuario";
+    document.getElementById("bienvenida").innerHTML = `Hola, <strong>${nombre}</strong>`;
+}
+
 
 document.getElementById("recomendar").addEventListener("click", () => {
     const edad = parseInt(document.getElementById("edad").value);
@@ -17,8 +71,16 @@ document.getElementById("recomendar").addEventListener("click", () => {
     resultado.textContent = "Recomendado: Nivel avanzado o preuniversitario.";
     }
 });  
-    //Mostrar y ocultar los temas de las materias
-function toggleSubtemas(id) {
+//Mostrar y ocultar los temas de las materias
+document.getElementById("mostrarPremium").addEventListener("click", function() {
+    if (!usuarioRegistrado || !usuarioEsPremium) {
+        document.getElementById("mensaje-premium").style.display = "block";
+        return;
+    }
+document.getElementById("listaPremium").classList.toggle("oculto");
+});
+    
+    function toggleSubtemas(id) {
     const element = document.getElementById("subtemas-" + id);
     if (element.classList.contains("oculto")) {
     element.classList.remove("oculto");

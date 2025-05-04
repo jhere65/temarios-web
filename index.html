@@ -49,7 +49,7 @@
             <h2>🎓 Temarios Gratuitos</h2>
             <ul>
                 <li>
-                    <button onclick="toggleSubtemas('quimica')">🧪 Química</button>
+                    <button onclick="toggleSubtemas('subtemas-quimica')">🧪 Química</button>
                     <ul id="subtemas-quimica" class="oculto">
                     <li>Primaria: Estados de la materia, Mezclas y soluciones</li>
                     <li>Secundaria: Tabla periódica, Enlaces químicos</li>
@@ -57,7 +57,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button onclick="toggleSubtemas('matematica')">🧮 Matemática</button>
+                    <button onclick="toggleSubtemas('subtemas-matematica')">🧮 Matemática</button>
                     <ul id="subtemas-matematica" class="oculto">
                     <li>Primaria: Suma, resta, multiplicación y división</li>
                     <li>Secundaria: Álgebra, Trigonometría básica</li>
@@ -65,7 +65,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button onclick="toggleSubtemas('biologia')">🌱 Biología</button>
+                    <button onclick="toggleSubtemas('subtemas-biologia')">🌱 Biología</button>
                     <ul id="subtemas-biologia" class="oculto">
                     <li>Primaria: Partes del cuerpo, Animales</li>
                     <li>Secundaria: Células, Sistemas del cuerpo humano</li>
@@ -74,7 +74,7 @@
                 </li>
                 
                 <li>
-                    <button onclick="toggleSubtemas('historia')">🏛️ Historia</button>
+                    <button onclick="toggleSubtemas('subtemas-historia')">🏛️ Historia</button>
                     <ul id="subtemas-historia" class="oculto">
                     <li>Primaria: Civilizaciones antiguas</li>
                     <li>Secundaria: Revoluciones, Historia del Perú</li>
@@ -83,7 +83,7 @@
                 </li>
                 
                 <li>
-                    <button onclick="toggleSubtemas('geografia')">🗺️ Geografía</button>
+                    <button onclick="toggleSubtemas('subtemas-geografia')">🗺️ Geografía</button>
                     <ul id="subtemas-geografia" class="oculto">
                     <li>Primaria: Continentes, Climas</li>
                     <li>Secundaria: Mapas, Relieve</li>
@@ -92,7 +92,7 @@
                 </li>
                 
                 <li>
-                    <button onclick="toggleSubtemas('ingles')">🇬🇧 Inglés</button>
+                    <button onclick="toggleSubtemas('subtemas-ingles')">🇬🇧 Inglés</button>
                     <ul id="subtemas-ingles" class="oculto">
                     <li>Primaria: Saludos, Colores</li>
                     <li>Secundaria: Gramática básica, Verbos</li>
@@ -101,7 +101,7 @@
                 </li>
                 
                 <li>
-                    <button onclick="toggleSubtemas('filosofia')">🧠 Filosofía</button>
+                    <button onclick="toggleSubtemas('subtemas-filosofia')">🧠 Filosofía</button>
                     <ul id="subtemas-filosofia" class="oculto">
                     <li>Secundaria: Pensadores clásicos, Ética</li>
                     <li>Superior (básico): Lógica, Corrientes filosóficas</li>
@@ -182,106 +182,6 @@
 
 <div id="mensaje-bienvenida" style="display: none; padding: 10px; background-color: #d4edda; color: #155724; font-weight: bold; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 10px;">
 </div>
-<script>
-  // Tu configuración Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
-    authDomain: "webtemariux.firebaseapp.com",
-    projectId: "webtemariux",
-    appId: "1:994279376923:web:68ef2427e69da252f190be"
-};
-
-  // Inicializar Firebase
-firebase.initializeApp(firebaseConfig); 
-const db = firebase.firestore();
-
-    let usuarioRegistrado = false;
-    let usuarioEsPremium = false;
-
-    firebase.auth().onAuthStateChanged(async (user) =>{
-    if (user) {
-    usuarioRegistrado = true;
-    const userRef = db.collection("usuarios").doc(user.uid);
-    const doc = await userRef.get();
-    function mostrarBienvenida(nombreCompleto) {
-    const nombre = nombreCompleto.split(" ")[0]; // Primer nombre
-    document.getElementById("nombre-usuario").textContent = `Hola, ${nombre}`;
-    document.getElementById("usuario-info").style.display = "block";
-}
-
-    // Si el usuario no existe aún, lo agregamos
-    if (!doc.exists) {
-        await userRef.set({
-        email: user.email,
-        premium: false
-        });
-    }
-
-    if (doc.exists && doc.data().premium === true) {
-        usuarioEsPremium = true;
-    }
-    // Dentro de onAuthStateChanged:
-    if (user) {
-        const foto = user.photoURL;
-    if (foto) {
-        document.getElementById("foto-usuario").src = foto;
-}
-// Mostrar mensaje de bienvenida
-    mostrarBienvenida(user.displayName || user.email);
-
-    mostrarTemarios();
-    } else {
-    ocultarTodo();
-    }
-}});
-
-function loginConGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-        // Mensaje de bienvenida en login
-        mostrarBienvenida(result.user.displayName || result.user.email);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-}
-function mostrarBienvenida(nombre) {
-    const mensaje = document.getElementById("mensaje-bienvenida");
-    mensaje.innerText = `✅ Bienvenido, ${nombre}. Tu sesión está activa.`;
-    mensaje.style.display = "block";
-}
-
-function ocultarTodo() {
-    document.getElementById("temarios-gratis").style.display = "none";
-    document.getElementById("temarios-premium").style.display = "none";
-    document.getElementById("mensaje-premium").style.display = "none";
-    document.getElementById("mensaje-bienvenida").style.display = "none";
-}
-
-function mostrarTemarios() {
-    if (usuarioRegistrado) {
-    document.getElementById("temarios-gratis").style.display = "block";
-
-    if (usuarioEsPremium) {
-        document.getElementById("temarios-premium").style.display = "block";
-        document.getElementById("mensaje-premium").style.display = "none";
-    } else {
-        document.getElementById("temarios-premium").style.display = "none";
-        document.getElementById("mensaje-premium").style.display = "block";
-    }
-    }
-}
-function cerrarSesion() {
-firebase.auth().signOut().then(() => {
-    alert("Has cerrado sesión.");
-    location.reload(); // Recarga la página para ocultar contenido
-}).catch((error) => {
-    console.error("Error al cerrar sesión:", error);
-});
-}
-
-</script>
 <script src="script.js"></script>
 </body>
 </html>
