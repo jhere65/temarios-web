@@ -20,6 +20,18 @@ document.getElementById("recomendar").addEventListener("click", () => {
     resultado.textContent = "Recomendado: Nivel avanzado o preuniversitario.";
     }
 });  
+    //Mostrar y ocultar los temas de las materias
+function toggleSubtemas(id) {
+    const element = document.getElementById("subtemas-" + id);
+    if (element.classList.contains("oculto")) {
+    element.classList.remove("oculto");
+    element.classList.add("visible");
+    } else {
+    element.classList.remove("visible");
+    element.classList.add("oculto");
+    }
+}
+
 
   // Mostrar/ocultar temarios premium
 document.getElementById("mostrarPremium").addEventListener("click", () => {

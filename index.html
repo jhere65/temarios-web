@@ -33,13 +33,65 @@
         <section id="gratis">
             <h2>🎓 Temarios Gratuitos</h2>
             <ul>
-            <li>🧪 Química</li>
-            <li>🧮 Matemática</li>
-            <li>🌱 Biología</li>
-            <li>🏛️ Historia</li>
-            <li>🗺️ Geografía</li>
-            <li>🇬🇧 Inglés</li>
-            <li>🧠 Filosofía</li>
+                <li>
+                    <button onclick="toggleSubtemas('quimica')">🧪 Química</button>
+                    <ul id="subtemas-quimica" class="oculto">
+                    <li>Primaria: Estados de la materia, Mezclas y soluciones</li>
+                    <li>Secundaria: Tabla periódica, Enlaces químicos</li>
+                    <li>Superior (básico): Estequiometría, Reacciones químicas</li>
+                    </ul>
+                </li>
+                <li>
+                    <button onclick="toggleSubtemas('matemática')">🧮 Matemática</button>
+                    <ul id="subtemas-matematica" class="oculto">
+                        <li>Primaria: Suma, resta, multiplicación y división</li>
+                        <li>Secundaria: Álgebra, Trigonometría básica</li>
+                        <li>Superior (básico): Lógica matemática, Funciones</li>
+                    </ul>
+                </li>
+                <li>
+                    <button onclick="toggleSubtemas('biologia')">🌱 Biología</button>
+                    <ul id="subtemas-biologia" class="oculto">
+                    <li>Primaria: Partes del cuerpo, Animales</li>
+                    <li>Secundaria: Células, Sistemas del cuerpo humano</li>
+                    <li>Superior (básico): Genética, Bioquímica básica</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('historia')">🏛️ Historia</button>
+                    <ul id="subtemas-historia" class="oculto">
+                    <li>Primaria: Civilizaciones antiguas</li>
+                    <li>Secundaria: Revoluciones, Historia del Perú</li>
+                    <li>Superior (básico): Historiografía, Procesos políticos</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('geografia')">🗺️ Geografía</button>
+                    <ul id="subtemas-geografia" class="oculto">
+                    <li>Primaria: Continentes, Climas</li>
+                    <li>Secundaria: Mapas, Relieve</li>
+                    <li>Superior (básico): Geografía física, Recursos naturales</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('ingles')">🇬🇧 Inglés</button>
+                    <ul id="subtemas-ingles" class="oculto">
+                    <li>Primaria: Saludos, Colores</li>
+                    <li>Secundaria: Gramática básica, Verbos</li>
+                    <li>Superior (básico): Redacción, Comprensión lectora</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('filosofia')">🧠 Filosofía</button>
+                    <ul id="subtemas-filosofia" class="oculto">
+                    <li>Secundaria: Pensadores clásicos, Ética</li>
+                    <li>Superior (básico): Lógica, Corrientes filosóficas</li>
+                    </ul>
+                </li>
             </ul>
         </section>
 
@@ -48,13 +100,54 @@
             <button id="mostrarPremium">Ver temarios premium</button>
             <div id="listaPremium" class="oculto">
             <ul>
-                <li>🧪 Química Avanzada - S/. 3.00</li>
-                <li>🧮 Matemática Avanzada - S/. 3.00</li>
-                <li>🌱 Biología Molecular - S/. 4.00</li>
-                <li>🏛️ Historia del Perú - S/. 4.00</li>
-                <li>🗺️ Geopolítica Moderna - S/. 4.00</li>
-                <li>🇬🇧 Inglés Académico - S/. 5.00</li>
-                <li>🧠 Filosofía Moderna - S/. 5.00</li>
+                <li>
+                    <button onclick="toggleSubtemas('quimicaPremium')">🧪 Química Avanzada - S/. 3.00</button>
+                    <ul id="subtemas-quimicaPremium" class="oculto">
+                    <li>Superior (avanzado): Química orgánica, Cinética química</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('matematicaPremium')">🧮 Matemática Avanzada - S/. 3.00</button>
+                    <ul id="subtemas-matematicaPremium" class="oculto">
+                    <li>Superior (avanzado): Cálculo, Ecuaciones diferenciales</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('biologiaPremium')">🌱 Biología Molecular - S/. 4.00</button>
+                    <ul id="subtemas-biologiaPremium" class="oculto">
+                    <li>Superior (avanzado): Genética avanzada, Biotecnología</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('historiaPremium')">🏛️ Historia del Perú - S/. 4.00</button>
+                    <ul id="subtemas-historiaPremium" class="oculto">
+                    <li>Superior (avanzado): Conflictos sociales, Historia contemporánea</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('geografiaPremium')">🗺️ Geopolítica Moderna - S/. 4.00</button>
+                    <ul id="subtemas-geografiaPremium" class="oculto">
+                    <li>Superior (avanzado): Geopolítica internacional, Recursos estratégicos</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('inglesPremium')">🇬🇧 Inglés Académico - S/. 5.00</button>
+                    <ul id="subtemas-inglesPremium" class="oculto">
+                    <li>Superior (avanzado): Redacción académica, Inglés para investigación</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <button onclick="toggleSubtemas('filosofiaPremium')">🧠 Filosofía Moderna - S/. 5.00</button>
+                    <ul id="subtemas-filosofiaPremium" class="oculto">
+                    <li>Superior (avanzado): Filosofía contemporánea, Filosofía política</li>
+                    </ul>
+                </li>
             </ul>
             </div>
         </section>          

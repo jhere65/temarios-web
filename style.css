@@ -10,6 +10,15 @@ body {
     color: #333;
     line-height: 1.6;
     padding: 0 10px;
+    .oculto {
+        display: none;
+    }
+    
+    .visible {
+        display: block;
+        margin-top: 5px;
+        margin-left: 15px;
+    }
 }
 
 header {
