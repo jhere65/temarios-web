@@ -69,9 +69,6 @@
         <p>&copy; 2025 Temarios Personalizados | <span id="hora"></span></p>
     </footer>
 
-<!-- Firebase App (SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
 
 <script>
   // Tu configuración Firebase
@@ -83,13 +80,12 @@ const firebaseConfig = {
 };
 
   // Inicializar Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+firebase.initializeApp(firebaseConfig);
 
   // Iniciar sesión con Google
 function loginConGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
+    firebase.auth().signInWithPopup(provider)
     .then(result => {
         alert(`Bienvenido, ${result.user.displayName}`);
     })
