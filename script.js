@@ -32,12 +32,81 @@ function toggleSubtemas(id) {
     }
 }
 
+let usuarioRegistrado = false;
+let usuarioEsPremium = false;
+
+firebase.auth().onAuthStateChanged(async (user) => {
+if (user) {
+    usuarioRegistrado = true;
+
+    // Verifica si el usuario está en la whitelist premium
+    const userDoc = await firebase.firestore().collection("usuarios").doc(user.uid).get();
+    if (userDoc.exists && userDoc.data().premium === true) {
+    usuarioEsPremium = true;
+    }
+
+    mostrarTemarios();
+} else {
+    usuarioRegistrado = false;
+    usuarioEsPremium = false;
+    ocultarTodo();
+}
+});
+
+function ocultarTodo() {
+    document.getElementById("temarios-gratis").style.display = "none";
+    document.getElementById("temarios-premium").style.display = "none";
+}
+
+function mostrarTemarios() {
+    if (usuarioRegistrado) {
+    document.getElementById("temarios-gratis").style.display = "block";
+
+    if (usuarioEsPremium) {
+        document.getElementById("temarios-premium").style.display = "block";
+    } else {
+        document.getElementById("temarios-premium").style.display = "none";
+    }
+    }
+}
+
 
   // Mostrar/ocultar temarios premium
 document.getElementById("mostrarPremium").addEventListener("click", () => {
     const lista = document.getElementById("listaPremium");
     lista.classList.toggle("oculto");
 });
+
+firebase.auth().onAuthStateChanged(async (user) => {
+    if (user) {
+    const userRef = firebase.firestore().collection("usuarios").doc(user.uid);
+    const doc = await userRef.get();
+
+    if (!doc.exists) {
+        await userRef.set({
+        email: user.email,
+          premium: false // Por defecto, no es premium
+        });
+    }
+
+      // Verificación de premium como antes...
+    }
+});
+
+function mostrarTemarios() {
+    if (usuarioRegistrado) {
+    document.getElementById("temarios-gratis").style.display = "block";
+
+    if (usuarioEsPremium) {
+        document.getElementById("temarios-premium").style.display = "block";
+        document.getElementById("mensaje-premium").style.display = "none";
+    } else {
+        document.getElementById("temarios-premium").style.display = "none";
+        document.getElementById("mensaje-premium").style.display = "block";
+    }
+    }
+}
+
 
   // Mostrar hora actual
 function actualizarHora() {
