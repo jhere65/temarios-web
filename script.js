@@ -38,7 +38,6 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         mostrarBienvenida(user);
         usuarioRegistrado = true;
-
         const nombre = user.displayName || "Usuario";
         document.getElementById("bienvenida").innerHTML = `Hola, <strong>${nombre}</strong>`;
         document.getElementById("temarios-gratis").style.display = "block";
@@ -50,7 +49,13 @@ onAuthStateChanged(auth, (user) => {
 
 function mostrarBienvenida(usuario) {
     const nombre = usuario.displayName || "Usuario";
+    const foto = usuario.photoURL;
+
     document.getElementById("bienvenida").innerHTML = `Hola, <strong>${nombre}</strong>`;
+    
+    document.getElementById("usuario-info").style.display = "block";
+    document.getElementById("nombre-usuario").textContent = nombre;
+    document.getElementById("foto-usuario").src = foto;
 }
 
 
