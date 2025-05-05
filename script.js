@@ -12,6 +12,14 @@ const firebaseConfig = {
     appId: "1:994279376923:web:68ef2427e69da252f190be"
 };
 
+const bienvenidaDiv = document.getElementById("bienvenida");
+if (bienvenidaDiv) {
+    bienvenidaDiv.innerHTML = `Bienvenido, ${usuario.displayName}`;
+} else {
+    console.error("El div con id 'bienvenida' no se encontró.");
+}
+
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
