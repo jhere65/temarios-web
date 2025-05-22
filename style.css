@@ -230,3 +230,36 @@ footer {
     background-color: #ffe4e1;
     border-left: 6px solid #e57373;
 }
+
+.apoyo {
+    background-color: #fff3cd;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 30px auto;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.apoyo h2 {
+    font-size: 1.5em;
+    color: #d17f00;
+}
+
+.apoyo p {
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.btn-apoyo {
+    background-color: #25d366;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: background 0.3s;
+}
+
+.btn-apoyo:hover {
+    background-color: #1ebe57;
+}
