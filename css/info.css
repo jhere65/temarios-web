@@ -100,10 +100,10 @@ a:hover {
     width: 100%;
     text-align: center;
     }
-    .btn-volver {
-        width: 100%;
-        display: block;
-        font-size: 1rem;
-        padding: 1rem;
+.btn-volver {
+    width: 100%;
+    display: block;
+    font-size: 1rem;
+    padding: 1rem;
     }
 }
