@@ -1,0 +1,46 @@
+/* info.css - Estilos para acerca.html y privacidad.html */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom right, #fdfdfd, #f0f0ff);
+    margin: 0;
+    padding: 2rem;
+    color: #333;
+    line-height: 1.6;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #4a47a3;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    color: #4a47a3;
+    margin-top: 1.5rem;
+    border-bottom: 2px solid #4a47a3;
+    padding-bottom: 0.3rem;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+a {
+    display: inline-block;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #4a47a3;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #3a368f;
+}
