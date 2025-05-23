@@ -2,119 +2,80 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-const firebaseConfig = {
-    apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
-    authDomain: "webtemariux.firebaseapp.com",
-    projectId: "webtemariux",
-    storageBucket: "webtemariux.firebasestorage.app",
-    messagingSenderId: "994279376923",
-    appId: "1:994279376923:web:68ef2427e69da252f190be"
-};
+// Esperar a que se cargue el DOM
+document.addEventListener('DOMContentLoaded', () => {
+    // Referencias a los elementos del DOM
+    const usuarioInfo = document.getElementById('usuario-info');
+    const fotoUsuario = document.getElementById('foto-usuario');
+    const nombreUsuario = document.getElementById('nombre-usuario');
+    const botonCerrarSesion = document.getElementById('cerrar-sesion');
+    const botonesMostrar = document.querySelectorAll('.mostrar');
+    const secciones = document.querySelectorAll('.seccion');
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+  // Configurar Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyDk-GkFo4oTJbMq8BweAZxukj5-sREiuPg",
+        authDomain: "webtemariux.firebaseapp.com",
+        projectId: "webtemariux",
+        storageBucket: "webtemariux.firebasestorage.app",
+        messagingSenderId: "994279376923",
+        appId: "1:994279376923:web:68ef2427e69da252f190be",
+        measurementId: "G-KG8F6VGWQK"
+    };
 
-let usuarioRegistrado = false;
-let usuarioEsPremium = false;
+    // Inicializar Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-document.getElementById("iniciarSesion").addEventListener("click", () => {
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            const user = result.user;
-            mostrarBienvenida(user);
-        })
-        .catch((error) => {
-            console.error("Error al iniciar sesión:", error);
+    // Iniciar sesión con Google
+    window.iniciarSesion = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).catch(error => {
+        console.error('Error al iniciar sesión:', error.message);
         });
-});
+    };
 
-document.getElementById("cerrarSesion").addEventListener("click", () => {
-    signOut(auth).then(() => {
-        location.reload();
+    // Cerrar sesión
+    botonCerrarSesion?.addEventListener('click', () => {
+        auth.signOut().catch(error => {
+        console.error('Error al cerrar sesión:', error.message);
+        });
     });
-});
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        mostrarBienvenida(user);
-        usuarioRegistrado = true;
-        const nombre = user.displayName || "Usuario";
-        document.getElementById("bienvenida").innerHTML = `Hola, <strong>${nombre}</strong>`;
-        document.getElementById("temarios-gratis").style.display = "block";
-        if (usuarioEsPremium) {
-            document.getElementById("temarios-premium").style.display = "block";
+    // Mostrar u ocultar usuario al cambiar el estado de autenticación
+    auth.onAuthStateChanged(user => {
+        if (user) {
+        fotoUsuario.src = user.photoURL;
+        nombreUsuario.textContent = user.displayName;
+        usuarioInfo.style.display = 'flex';
+        } else {
+        usuarioInfo.style.display = 'none';
         }
-    }
-});
+    });
 
-function mostrarBienvenida(usuario) {
-    const nombre = usuario.displayName || "Usuario";
-    const foto = usuario.photoURL;
+    // Mostrar y ocultar secciones según el botón clicado
+    botonesMostrar.forEach(boton => {
+        boton.addEventListener('click', () => {
+        const seccionId = boton.getAttribute('data-seccion');
+        const seccion = document.getElementById(seccionId);
 
-    document.getElementById("bienvenida").innerHTML = `Hola, <strong>${nombre}</strong>`;
-    
-    document.getElementById("usuario-info").style.display = "block";
-    document.getElementById("nombre-usuario").textContent = nombre;
-    document.getElementById("foto-usuario").src = foto;
-}
+        if (seccion) {
+            const estaVisible = seccion.classList.contains('visible');
 
+            // Ocultar todas las secciones
+            secciones.forEach(sec => {
+            sec.classList.remove('visible');
+            sec.classList.add('oculto');
+            });
 
-document.getElementById("recomendar").addEventListener("click", () => {
-    const edad = parseInt(document.getElementById("edad").value);
-    const resultado = document.getElementById("recomendacion");
-
-    if (!edad || edad < 5) {
-    resultado.textContent = "Por favor, ingresa una edad válida.";
-    return;
-    }
-
-    if (edad <= 11) {
-    resultado.textContent = "Recomendado: Nivel primaria.";
-    } else if (edad <= 16) {
-    resultado.textContent = "Recomendado: Nivel secundaria.";
-    } else {
-    resultado.textContent = "Recomendado: Nivel avanzado o preuniversitario.";
-    }
-});  
-//Mostrar y ocultar los temas de las materias
-document.getElementById("mostrarPremium").addEventListener("click", function() {
-    if (!usuarioRegistrado || !usuarioEsPremium) {
-        document.getElementById("mensaje-premium").style.display = "block";
-        return;
-    }
-document.getElementById("listaPremium").classList.toggle("oculto");
-});
-    
-    function toggleSubtemas(id) {
-    const element = document.getElementById("subtemas-" + id);
-    if (element.classList.contains("oculto")) {
-    element.classList.remove("oculto");
-    element.classList.add("visible");
-    } else {
-    element.classList.remove("visible");
-    element.classList.add("oculto");
-    }
-}
-
-
-
-function mostrarTemarios() {
-    if (usuarioRegistrado) {
-    document.getElementById("temarios-gratis").style.display = "block";
-
-    if (usuarioEsPremium) {
-        document.getElementById("temarios-premium").style.display = "block";
-        document.getElementById("mensaje-premium").style.display = "none";
-    } else {
-        document.getElementById("temarios-premium").style.display = "none";
-        document.getElementById("mensaje-premium").style.display = "block";
-    }
-    }
-}
-
-
+            // Mostrar o volver a ocultar la seleccionada
+            if (!estaVisible) {
+            seccion.classList.remove('oculto');
+            seccion.classList.add('visible');
+            }
+        }
+        });
+    });
   // Mostrar hora actual
 function actualizarHora() {
     const ahora = new Date();
