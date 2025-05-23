@@ -1,14 +1,25 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
 
 // Esperar a que se cargue el DOM
 document.addEventListener('DOMContentLoaded', () => {
     // Referencias a los elementos del DOM
-    const usuarioInfo = document.getElementById('usuario-info');
-    const fotoUsuario = document.getElementById('foto-usuario');
-    const nombreUsuario = document.getElementById('nombre-usuario');
-    const botonCerrarSesion = document.getElementById('cerrar-sesion');
+    // Elementos del DOM
+    const btnIniciarSesion = document.getElementById("iniciar-sesion");
+    const btnCerrarSesion = document.getElementById("cerrar-sesion");
+    const usuarioInfo = document.getElementById("usuario-info");
+    const nombreUsuario = document.getElementById("nombre-usuario");
+    const fotoUsuario = document.getElementById("foto-usuario");
     const botonesMostrar = document.querySelectorAll('.mostrar');
     const secciones = document.querySelectorAll('.seccion');
 
@@ -25,7 +36,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicializar Firebase
     const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+// Funciones
+btnIniciarSesion.addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+        console.log("Sesión iniciada:", result.user.displayName);
+        })
+        .catch((error) => {
+        console.error("Error al iniciar sesión:", error);
+    });
+});
+
+btnCerrarSesion.addEventListener("click", () => {
+    signOut(auth)
+        .then(() => {
+        console.log("Sesión cerrada.");
+        })
+        .catch((error) => {
+        console.error("Error al cerrar sesión:", error);
+        });
+});
+
+// Cambios de estado de sesión
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        mostrarUsuario(user.displayName, user.photoURL);
+    } else {
+        ocultarUsuario();
+    }
+});
+
+function mostrarUsuario(nombre, fotoURL) {
+    nombreUsuario.textContent = nombre;
+    fotoUsuario.src = fotoURL;
+    usuarioInfo.style.display = "flex";
+    btnIniciarSesion.style.display = "none";
+}
+
+function ocultarUsuario() {
+    usuarioInfo.style.display = "none";
+    btnIniciarSesion.style.display = "inline-block";
+}
 
     // Iniciar sesión con Google
     window.iniciarSesion = () => {
