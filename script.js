@@ -1,5 +1,4 @@
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import {
@@ -80,21 +79,6 @@ function ocultarUsuario() {
     usuarioInfo.style.display = "none";
     btnIniciarSesion.style.display = "inline-block";
 }
-
-    // Iniciar sesión con Google
-    window.iniciarSesion = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider).catch(error => {
-        console.error('Error al iniciar sesión:', error.message);
-        });
-    };
-
-    // Cerrar sesión
-    botonCerrarSesion?.addEventListener('click', () => {
-        auth.signOut().catch(error => {
-        console.error('Error al cerrar sesión:', error.message);
-        });
-    });
 
     // Mostrar u ocultar usuario al cambiar el estado de autenticación
     auth.onAuthStateChanged(user => {
