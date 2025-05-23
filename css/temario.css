@@ -71,3 +71,10 @@ text-align: center;
 padding: 15px;
 margin-top: 40px;
 }
+.container {
+    display: flex; /* O flexbox */
+    /* Otras propiedades como justify-content, align-items */
+    }
+    .column {
+    width: 50%; /* O cualquier ancho deseado */
+    }
