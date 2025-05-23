@@ -1,46 +1,87 @@
-/* info.css - Estilos para acerca.html y privacidad.html */
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom right, #fdfdfd, #f0f0ff);
+/* Reset básico */
+* {
     margin: 0;
-    padding: 2rem;
-    color: #333;
-    line-height: 1.6;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* Estilos generales */
+body {
+    font-family: "Segoe UI", sans-serif;
+    line-height: 1.6;
+    background: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* Contenedor central */
+main, body {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Títulos */
 h1 {
+    font-size: 1.8em;
+    margin-bottom: 16px;
+    color: #0066cc;
     text-align: center;
-    color: #4a47a3;
-    margin-bottom: 1.5rem;
 }
 
 h2 {
-    color: #4a47a3;
-    margin-top: 1.5rem;
-    border-bottom: 2px solid #4a47a3;
-    padding-bottom: 0.3rem;
+    font-size: 1.4em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #444;
 }
 
+/* Párrafos */
 p {
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 14px;
+    font-size: 1em;
 }
 
+/* Enlace de volver */
 a {
     display: inline-block;
-    margin-top: 2rem;
+    margin-top: 20px;
+    padding: 10px 16px;
+    background-color: #0066cc;
+    color: white;
     text-decoration: none;
-    color: #ffffff;
-    background-color: #4a47a3;
-    padding: 0.6rem 1.2rem;
     border-radius: 8px;
     transition: background-color 0.3s ease;
 }
 
 a:hover {
-    background-color: #3a368f;
+    background-color: #004999;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    body {
+    padding: 10px;
+    }
+
+    main, body {
+    padding: 16px;
+    border-radius: 8px;
+    }
+
+    h1 {
+    font-size: 1.5em;
+    }
+
+    p, h2 {
+    font-size: 1em;
+    }
+
+    a {
+    width: 100%;
+    text-align: center;
+    }
 }
