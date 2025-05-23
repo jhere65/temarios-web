@@ -76,6 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         });
     });
+function mostrarUsuario(nombre, fotoURL) {
+    document.getElementById("nombre-usuario").textContent = nombre;
+    document.getElementById("foto-usuario").src = fotoURL;
+    document.getElementById("usuario-info").style.display = "flex";
+    document.getElementById("iniciar-sesion").style.display = "none";
+}
+
+function ocultarUsuario() {
+    document.getElementById("usuario-info").style.display = "none";
+    document.getElementById("iniciar-sesion").style.display = "inline-block";
+}
+
   // Mostrar hora actual
 function actualizarHora() {
     const ahora = new Date();
