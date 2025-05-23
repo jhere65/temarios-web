@@ -13,23 +13,23 @@
 </head>
 <body>  
     <header>
-        <h1>📚 Temarios Personalizados</h1>
+        <h1>📚 Bienvenido a Temariux</h1>
+        <button id="iniciar-sesion">Iniciar sesión</button>
         <nav>
             <a href="#gratis">Temarios Gratis</a>
             <a href="#premium">Temarios Premium</a>
             <a href="#contacto">Contacto</a>
         </nav>
+            <div id="usuario-info">
+        <img id="foto-usuario" src="" alt="Foto">
+        <span id="nombre-usuario"></span>
+        <button id="cerrar-sesion">Cerrar sesión</button>
+    </div>
     </header>
     <div id="bienvenida"></div>
 
     <main>
         <section id="nivel">
-            <button onclick="iniciarSesion()">Iniciar sesión con Google</button>
-            <div id="usuario-info" style="display: none">
-                <img id="foto-usuario" src="" alt="Foto">
-                <span id="nombre-usuario"></span>
-                <button id="cerrar-sesion">Cerrar sesión</button>
-            </div>
         </section>
 <script>
         function toggleSubtemas(id) {
