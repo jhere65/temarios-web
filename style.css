@@ -173,15 +173,17 @@ footer {
 /* Información del usuario */
 #usuario-info {
     display: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 5px 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#usuario-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 #foto-usuario {
@@ -191,8 +193,8 @@ footer {
 }
 
 #nombre-usuario {
-    margin-left: 10px;
     font-weight: bold;
+    font-size: 1rem;
 }
 
 #usuario-info button {
@@ -204,6 +206,16 @@ footer {
     padding: 5px 10px;
     cursor: pointer;
     font-size: 12px;
+}
+
+#cerrar-sesion {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 footer {
