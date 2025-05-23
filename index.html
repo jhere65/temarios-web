@@ -21,20 +21,15 @@
         </nav>
     </header>
     <div id="bienvenida"></div>
-    <div id="usuario-info" style="display: none; position: absolute; top: 10px; left: 10px;">
-        <img id="foto-usuario" src="" alt="Foto" style="width: 40px; height: 40px; border-radius: 50%; vertical-align: middle;">
-        <span id="nombre-usuario" style="margin-left: 10px; font-weight: bold;"></span>
-        <button id="cerrar-sesion" style="margin-left: 15px; padding: 5px 10px; font-size: 12px;">Cerrar sesión</button>
-    </div>   
 
     <main>
         <section id="nivel">
             <button onclick="iniciarSesion()">Iniciar sesión con Google</button>
-            <h2>🧠 ¿Qué nivel necesitas?</h2>
-            <label for="edad">Ingresa tu edad:</label>
-            <input type="number" id="edad" min="5" max="99">
-            <button id="recomendar">Recomendar nivel</button>
-            <p id="recomendacion"></p>
+            <div id="usuario-info" style="display: none; position: absolute; top: 10px; left: 10px;">
+                <img id="foto-usuario" src="" alt="Foto" style="width: 40px; height: 40px; border-radius: 50%; vertical-align: middle;">
+                <span id="nombre-usuario" style="margin-left: 10px; font-weight: bold;"></span>
+                <button id="cerrar-sesion" style="margin-left: 15px; padding: 5px 10px; font-size: 12px;">Cerrar sesión</button>
+            </div>
         </section>
 <script>
         function toggleSubtemas(id) {
