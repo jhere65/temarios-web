@@ -46,18 +46,9 @@ p {
 }
 
 /* Enlace de volver */
-/*a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 16px;
-    background-color: #0066cc;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}*/
-
-
+a {
+    font-size: 1.2rem;
+}
 /* RESPONSIVE */
 @media (max-width: 600px) {
     body {
@@ -75,5 +66,8 @@ p {
 
     p, h2 {
     font-size: 1em;
+    }
+    a {
+        font-size: 1.8rem;
     }
 }
