@@ -68,7 +68,7 @@ a:hover {
     color: white;
     text-decoration: none;
     border-radius: 8px;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     text-align: center;
     transition: background-color 0.3s;
 }
@@ -103,7 +103,7 @@ a:hover {
 .btn-volver {
     display: block;
     width: 100%;
-    font-size: 1.5rem;       /* Más grande para mejor visibilidad */
+    font-size: 1.8rem;       /* Más grande para mejor visibilidad */
     padding: 1.2rem 1.5rem;   /* Más espacio para tocar cómodamente */
     margin-top: 2.5rem;
     }
