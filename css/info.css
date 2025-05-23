@@ -57,25 +57,6 @@ a {
     transition: background-color 0.3s ease;
 }
 
-a:hover {
-    background-color: #004999;
-}
-.btn-volver {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #007BFF;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.8rem;
-    text-align: center;
-    transition: background-color 0.3s;
-}
-
-.btn-volver:hover {
-    background-color: #0056b3;
-}
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
@@ -94,17 +75,5 @@ a:hover {
 
     p, h2 {
     font-size: 1em;
-    }
-
-    a {
-    width: 100%;
-    text-align: center;
-    }
-.btn-volver {
-    display: block;
-    width: 100%;
-    font-size: 1.8rem;       /* Más grande para mejor visibilidad */
-    padding: 1.2rem 1.5rem;   /* Más espacio para tocar cómodamente */
-    margin-top: 2.5rem;
     }
 }
