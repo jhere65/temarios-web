@@ -60,6 +60,22 @@ a {
 a:hover {
     background-color: #004999;
 }
+.btn-volver {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn-volver:hover {
+    background-color: #0056b3;
+}
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
@@ -83,5 +99,11 @@ a:hover {
     a {
     width: 100%;
     text-align: center;
+    }
+    .btn-volver {
+        width: 100%;
+        display: block;
+        font-size: 1rem;
+        padding: 1rem;
     }
 }
