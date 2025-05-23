@@ -71,6 +71,14 @@ text-align: center;
 padding: 15px;
 margin-top: 40px;
 }
+nav a.activo {
+    background-color: #4CAF50; /* Color de fondo para el enlace activo */
+    color: rgb(2, 2, 2);              /* Texto blanco para destacar */
+    font-weight: bold;         /* Negrita para resaltar */
+    border-radius: 5px;
+    padding: 6px 12px;
+}
+
 .container {
     display: flex; /* O flexbox */
     /* Otras propiedades como justify-content, align-items */
